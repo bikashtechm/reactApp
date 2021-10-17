@@ -4,12 +4,12 @@ import Product from "./Product";
 export default class ShoppingCart extends Component {
   state = {
     products: [
-      { id: 1, productName: "iPhone", price: 80000, quantity: 15 },
-      { id: 2, productName: "Sony Camera", price: 40000, quantity: 10 },
-      { id: 3, productName: "Samsung QLED TV", price: 60000, quantity: 13 },
-      { id: 4, productName: "iPad Pro", price: 70000, quantity: 12 },
-      { id: 5, productName: "xBox", price: 30000, quantity: 43 },
-      { id: 6, productName: "Dell Monitor", price: 50000, quantity: 67 },
+      { id: 1, productName: "iPhone", price: 80000, quantity: 0 },
+      { id: 2, productName: "Sony Camera", price: 40000, quantity: 0 },
+      { id: 3, productName: "Samsung QLED TV", price: 60000, quantity: 0 },
+      { id: 4, productName: "iPad Pro", price: 70000, quantity: 0 },
+      { id: 5, productName: "xBox", price: 30000, quantity: 0 },
+      { id: 6, productName: "Dell Monitor", price: 50000, quantity: 0 },
     ],
   };
   render() {
@@ -19,7 +19,12 @@ export default class ShoppingCart extends Component {
         <div className="row">
           {this.state.products.map((prod) => {
             return (
-              <Product key={prod.id} product={prod}>
+              <Product
+                key={prod.id}
+                product={prod}
+                onIncrement={this.handleIncrement}
+                onDecrement={this.handleDecrement}
+              >
                 <button className="btn btn-primary">Buy Now</button>
               </Product>
             );
@@ -28,4 +33,19 @@ export default class ShoppingCart extends Component {
       </div>
     );
   }
+  // Render method ends here
+  handleIncrement = (product) => {
+    let allProducts = [...this.state.products];
+    let index = allProducts.indexOf(product);
+    allProducts[index].quantity++;
+    this.setState({ products: allProducts });
+  };
+  handleDecrement = (product) => {
+    let allProducts = [...this.state.products];
+    let index = allProducts.indexOf(product);
+    if (allProducts[index].quantity > 0) {
+      allProducts[index].quantity--;
+      this.setState({ products: allProducts });
+    }
+  };
 }
