@@ -1,17 +1,14 @@
+import { get } from "jquery";
 import React, { Component } from "react";
 import Product from "./Product";
 
 export default class ShoppingCart extends Component {
-  state = {
-    products: [
-      { id: 1, productName: "iPhone", price: 80000, quantity: 0 },
-      { id: 2, productName: "Sony Camera", price: 40000, quantity: 0 },
-      { id: 3, productName: "Samsung QLED TV", price: 60000, quantity: 0 },
-      { id: 4, productName: "iPad Pro", price: 70000, quantity: 0 },
-      { id: 5, productName: "xBox", price: 30000, quantity: 0 },
-      { id: 6, productName: "Dell Monitor", price: 50000, quantity: 0 },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -24,6 +21,7 @@ export default class ShoppingCart extends Component {
                 product={prod}
                 onIncrement={this.handleIncrement}
                 onDecrement={this.handleDecrement}
+                onDelete={this.handleDelete}
               >
                 <button className="btn btn-primary">Buy Now</button>
               </Product>
@@ -32,6 +30,19 @@ export default class ShoppingCart extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount = async () => {
+    // fetch data from DataBase - API Calls
+    var responseData = await fetch("http://localhost:5000/products", {
+      method: "GET",
+    });
+    var prods = await responseData.json();
+    this.setState({ products: prods });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    // calls when there is state update
   }
   // Render method ends here
   handleIncrement = (product) => {
@@ -45,6 +56,14 @@ export default class ShoppingCart extends Component {
     let index = allProducts.indexOf(product);
     if (allProducts[index].quantity > 0) {
       allProducts[index].quantity--;
+      this.setState({ products: allProducts });
+    }
+  };
+  handleDelete = (product) => {
+    let allProducts = [...this.state.products];
+    let index = allProducts.indexOf(product);
+    if (window.confirm("Are you sure to Delete")) {
+      allProducts.splice(index, 1);
       this.setState({ products: allProducts });
     }
   };

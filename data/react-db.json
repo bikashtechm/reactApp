@@ -1,0 +1,57 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "productName": "iPhone",
+            "price": 80000,
+            "quantity": 0
+        },
+        {
+            "id": 2,
+            "productName": "Sony Camera",
+            "price": 40000,
+            "quantity": 0
+        },
+        {
+            "id": 3,
+            "productName": "Samsung QLED TV",
+            "price": 60000,
+            "quantity": 0
+        },
+        {
+            "id": 4,
+            "productName": "iPad Pro",
+            "price": 70000,
+            "quantity": 0
+        },
+        {
+            "id": 5,
+            "productName": "xBox",
+            "price": 30000,
+            "quantity": 0
+        },
+        {
+            "id": 6,
+            "productName": "Dell Monitor",
+            "price": 50000,
+            "quantity": 0
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "email": "bikash@gmail.com",
+            "password:": "bikash123"
+        },
+        {
+            "id": 2,
+            "email": "saraswati@gmail.com",
+            "password": "saraswati123"
+        },
+        {
+            "id": 3,
+            "email": "aarav@gmail.com",
+            "password": "aarav123"
+        }
+    ]
+}
