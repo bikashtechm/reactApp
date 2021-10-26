@@ -1,47 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class CustomersList extends Component {
-  state = {
-    pageTitle: "Customers",
-    customersCount: 225,
-    customers: [
-      {
-        id: 1,
-        name: "Bikash Shaw",
-        phone: "9096028231",
-        address: { city: "Kolkata" },
-        photo: "https://picsum.photos/id/1010/60",
-      },
-      {
-        id: 2,
-        name: "Saraswati Kumari",
-        phone: null,
-        address: { city: "Delhi" },
-        photo: "https://picsum.photos/id/1011/60",
-      },
-      {
-        id: 3,
-        name: "Aarav Shaw",
-        phone: "9098789876",
-        address: { city: "Chennai" },
-        photo: "https://picsum.photos/id/1012/60",
-      },
-      {
-        id: 4,
-        name: "Shyam Jadav",
-        phone: "4564323456",
-        address: { city: "Mumbai" },
-        photo: "https://picsum.photos/id/1013/60",
-      },
-      {
-        id: 5,
-        name: "Raman Siddhi",
-        phone: null,
-        address: { city: "Pune" },
-        photo: "https://picsum.photos/id/1014/60",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageTitle: "Customers",
+      customersCount: 225,
+      customers: [],
+    };
+  }
 
   render() {
     return (
@@ -51,9 +19,9 @@ export default class CustomersList extends Component {
           <span className="badge badge-secondary m-2">
             {this.state.customersCount}
           </span>
-          <button className="btn btn-info" onClick={this.onRefreshClick}>
-            Refresh
-          </button>
+          <Link to="/new-customer" className="btn btn-primary">
+            New Customer
+          </Link>
         </h4>
         <table className="table">
           <thead>
@@ -62,19 +30,27 @@ export default class CustomersList extends Component {
               <th>Customer Name</th>
               <th>Phone No</th>
               <th>City</th>
+              <th>Options</th>
             </tr>
           </thead>
-          <tbody>{this.getTableRows()}</tbody>
+          <tbody>{this.getCustomerRow()}</tbody>
         </table>
       </React.Fragment>
     );
   }
 
-  //Executes if user clicks on Refresh Button
-  onRefreshClick = () => {
-    this.setState({
-      customersCount: 1000,
+  componentDidMount = async () => {
+    document.title = "Customers Lists";
+    var responseData = await fetch("http://localhost:5000/customers", {
+      method: "GET",
     });
+    // success code between 200-299
+    if (responseData.ok) {
+      var custs = await responseData.json();
+      this.setState({ customers: custs, customersCount: custs.length });
+    } else {
+      console.log("Error - " + responseData.status);
+    }
   };
 
   getPhoneToRender = (customerPhn) => {
@@ -85,7 +61,7 @@ export default class CustomersList extends Component {
     }
   };
 
-  getTableRows = () => {
+  getCustomerRow = () => {
     return this.state.customers.map((cust, index) => {
       return (
         <tr key={cust.id}>
@@ -106,6 +82,19 @@ export default class CustomersList extends Component {
           <td>{cust.name}</td>
           <td>{this.getPhoneToRender(cust.phone)}</td>
           <td>{cust.address.city}</td>
+          <td>
+            <Link to={`/update-customer/${cust.id}`} className="btn btn-info">
+              Edit
+            </Link>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                this.onClickDelete(cust.id);
+              }}
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       );
     });
@@ -115,5 +104,21 @@ export default class CustomersList extends Component {
     var custArr = this.state.customers;
     custArr[index].photo = "https://picsum.photos/id/1020/60";
     this.setState({ customers: custArr });
+  };
+
+  onClickDelete = async (id) => {
+    if (window.confirm("Are you sure to Delete")) {
+      var responseData = await fetch(`http://localhost:5000/customers/${id}`, {
+        method: "DELETE",
+      });
+      var custcomer = await responseData.json();
+      if (custcomer.ok) {
+        var allCustomers = [...this.state.customers];
+        allCustomers = allCustomers.filter((cust) => {
+          return custcomer.id !== id;
+        });
+        this.setState({ customers: allCustomers });
+      }
+    }
   };
 }

@@ -1,57 +1,128 @@
 {
-    "products": [
-        {
-            "id": 1,
-            "productName": "iPhone",
-            "price": 80000,
-            "quantity": 0
-        },
-        {
-            "id": 2,
-            "productName": "Sony Camera",
-            "price": 40000,
-            "quantity": 0
-        },
-        {
-            "id": 3,
-            "productName": "Samsung QLED TV",
-            "price": 60000,
-            "quantity": 0
-        },
-        {
-            "id": 4,
-            "productName": "iPad Pro",
-            "price": 70000,
-            "quantity": 0
-        },
-        {
-            "id": 5,
-            "productName": "xBox",
-            "price": 30000,
-            "quantity": 0
-        },
-        {
-            "id": 6,
-            "productName": "Dell Monitor",
-            "price": 50000,
-            "quantity": 0
-        }
-    ],
-    "users": [
-        {
-            "id": 1,
-            "email": "bikash@gmail.com",
-            "password:": "bikash123"
-        },
-        {
-            "id": 2,
-            "email": "saraswati@gmail.com",
-            "password": "saraswati123"
-        },
-        {
-            "id": 3,
-            "email": "aarav@gmail.com",
-            "password": "aarav123"
-        }
-    ]
+  "products": [
+    {
+      "id": 1,
+      "productName": "iPhone",
+      "price": 80000,
+      "quantity": 0
+    },
+    {
+      "id": 2,
+      "productName": "Sony Camera",
+      "price": 40000,
+      "quantity": 0
+    },
+    {
+      "id": 3,
+      "productName": "Samsung QLED TV",
+      "price": 60000,
+      "quantity": 0
+    },
+    {
+      "id": 4,
+      "productName": "iPad Pro",
+      "price": 70000,
+      "quantity": 0
+    },
+    {
+      "id": 5,
+      "productName": "xBox",
+      "price": 30000,
+      "quantity": 0
+    },
+    {
+      "id": 6,
+      "productName": "Dell Monitor",
+      "price": 50000,
+      "quantity": 0
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "bikash@gmail.com",
+      "password": "bikash123"
+    },
+    {
+      "id": 2,
+      "email": "saraswati@gmail.com",
+      "password": "saraswati123"
+    },
+    {
+      "id": 3,
+      "email": "aarav@gmail.com",
+      "password": "aarav123"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Bikash Shaw",
+      "phone": "9096028231",
+      "address": {
+        "city": "Kolkata"
+      },
+      "photo": "https://picsum.photos/id/1010/60"
+    },
+    {
+      "id": 2,
+      "name": "Saraswati Kumari",
+      "phone": null,
+      "address": {
+        "city": "Delhi"
+      },
+      "photo": "https://picsum.photos/id/1011/60"
+    },
+    {
+      "id": 3,
+      "name": "Aarav Shaw",
+      "phone": "9098789876",
+      "address": {
+        "city": "Chennai"
+      },
+      "photo": "https://picsum.photos/id/1012/60"
+    },
+    {
+      "id": 4,
+      "name": "Shyam Jadav",
+      "phone": "4564323456",
+      "address": {
+        "city": "Mumbai"
+      },
+      "photo": "https://picsum.photos/id/1013/60"
+    },
+    {
+      "id": 5,
+      "name": "Raman Siddhi",
+      "phone": null,
+      "address": {
+        "city": "Pune"
+      },
+      "photo": "https://picsum.photos/id/1014/60"
+    },
+    {
+      "name": "Chicken Shaw",
+      "address": {
+        "city": "Chicken City"
+      }
+    },
+    {
+      "name": "New Customer",
+      "address": {
+        "city": "New CIty"
+      },
+      "phone": "123-123-123",
+      "photo": "https://picsum.photos/id/1012/60",
+      "id": 6
+    },
+    {
+      "name": "Update - Aarav Shaw",
+      "address": {
+        "city": "Update-Chennai"
+      },
+      "phone": "",
+      "photo": "https://picsum.photos/id/1012/60",
+      "id": 7
+    }
+  ]
 }

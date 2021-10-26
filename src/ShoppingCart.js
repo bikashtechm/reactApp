@@ -1,4 +1,3 @@
-import { get } from "jquery";
 import React, { Component } from "react";
 import Product from "./Product";
 
@@ -11,7 +10,7 @@ export default class ShoppingCart extends Component {
   }
   render() {
     return (
-      <div className="container-fluid">
+      <div>
         <h4>Shopping Cart</h4>
         <div className="row">
           {this.state.products.map((prod) => {
@@ -39,6 +38,7 @@ export default class ShoppingCart extends Component {
     });
     var prods = await responseData.json();
     this.setState({ products: prods });
+    document.title = "Shopping Cart - eCommerce";
   };
 
   componentDidUpdate(prevProps, prevState) {

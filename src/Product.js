@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Product extends Component {
-  state = {
-    product: this.props.product,
-  };
+  constructor(props) {
+    super(props);
+    this.state = { product: this.props.product };
+  }
   render() {
     return (
       <div className="col-lg-6">
@@ -48,7 +50,12 @@ export default class Product extends Component {
                 </button>
               </div>
             </div>
-            <div className="float-right">{this.props.children}</div>
+            <div className="float-right">
+              <Link to={`product/${this.state.product.id}`} className="mr-2">
+                Details
+              </Link>
+              {this.props.children}
+            </div>
           </div>
         </div>
       </div>
